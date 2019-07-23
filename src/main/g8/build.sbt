@@ -1,14 +1,23 @@
 import Dependencies._
 
-ThisBuild / scalaVersion     := "2.13.0"
-ThisBuild / version          := "0.1.0-SNAPSHOT"
-ThisBuild / organization     := "com.example"
-ThisBuild / organizationName := "example"
+lazy val zioVersion = "1.0.0-RC10-1"
 
-lazy val root = (project in file("."))
+lazy val `$name$` = (project in file("."))
   .settings(
-    name := "$name$",
-    libraryDependencies += scalaTest % Test
+    inThisBuild(Seq(
+      scalaVersion := "2.13.0",
+      version := "0.1.0-SNAPSHOT",
+      organization := "io.github.DmytroOrlov"
+    )),
+    addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.10.3"),
+    libraryDependencies ++= Seq(
+      "dev.zio" %% "zio" % zioVersion,
+      "dev.zio" %% "zio-interop-cats" % "2.0.0.0-RC1",
+      "io.monix" %% "monix" % "3.0.0-RC3",
+      "org.typelevel" %% "cats-core" % "2.0.0-M4",
+      "org.typelevel" %% "cats-mtl-core" % "0.6.0",
+      "org.typelevel" %% "cats-tagless-macros" % "0.9",
+      scalaTest % Test,
+      scalaCheck % Test
+    )
   )
-
-// See https://www.scala-sbt.org/1.x/docs/Using-Sonatype.html for instructions on how to publish to Sonatype.
