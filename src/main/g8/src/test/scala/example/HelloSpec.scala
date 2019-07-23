@@ -1,9 +1,10 @@
 package example
 
+import org.scalactic.TypeCheckedTripleEquals
 import org.scalatest._
 
-class HelloSpec extends FlatSpec with Matchers {
-  "The Hello object" should "say hello" in {
-    Hello.greeting shouldEqual "hello"
+class HelloSpec extends FlatSpec with Matchers with TypeCheckedTripleEquals {
+  "The Hello object" should "say Hello" in {
+    Hello.greeting should ===("Hello")
   }
 }
